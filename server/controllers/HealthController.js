@@ -4,7 +4,7 @@ const baseURL = 'https://sandbox-healthservice.priaid.ch';
 
 class HealthController {
 
-  static findIssues(req, res, next){
+  static findSymptoms(req, res, next){
     // const computedHash = CryptoJS.HmacMD5("c6QRo4q2FKa5e8T3B", "https://sandbox-authservice.priaid.ch/login");
     // const computedHashString = computedHash.toString(CryptoJS.enc.Base64);
     // // console.log(computedHashString);
@@ -12,7 +12,7 @@ class HealthController {
     // console.log(auth)
     // console.log(computedHashString);
     axios({
-      url: baseURL + '/issues',
+      url: baseURL + '/symptoms',
       method: "get",
       params: {
         token: process.env.HEALTHTOKEN,
