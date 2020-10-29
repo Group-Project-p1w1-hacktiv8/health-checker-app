@@ -1,5 +1,5 @@
 const { verifyToken } = require('../helpers/jwt');
-const { User } = require('../models');
+const { UserSymptom } = require('../models');
 
 const authentication = (req, res, next) => {
   const accessToken = req.headers.access_token;
@@ -24,34 +24,32 @@ const authentication = (req, res, next) => {
   }
 }
 
-// const authorization = async (req, res, next) => {
-//   // const todoId = +req.params.id;
-//   // console.log(req.params);
-//   const { id } = req.user;
-//   // console.log(id);
-//   try {
-//     const userTodo = await Todo.findByPk(todoId, {
-//       include: User
-//     });
+const authorization = async (req, res, next) => {
+  const userSymptomId = +req.params.id;
+  // console.log(req.params);
+  const { id } = req.user;
+  // console.log(id);
+  try {
+    const userSymptom = await UserSymptom.findByPk(userSymptomId);
 
-//     if (!userTodo) {
-//       throw {
-//         name: 'NotFound'
-//       }
-//     } else if (userTodo.User.id !== +id) {
-//       throw {
-//         name: 'NotAuthorized'
-//       }
-//     } else {
-//       next();
-//     }
+    if (!userSymptom) {
+      throw {
+        name: 'NotFound'
+      }
+    } else if (userSymptom.UserId !== +id) {
+      throw {
+        name: 'NotAuthorized'
+      }
+    } else {
+      next();
+    }
     
-//   } catch (error) {
-//     next(error);
-//   }
-// }
+  } catch (error) {
+    next(error);
+  }
+}
 
 module.exports = {
   authentication,
-  // authorization
+  authorization
 }
