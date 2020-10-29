@@ -16,10 +16,14 @@ Check if feature completed, then do `git add .` `git commit -m "single-line comm
   
 NOTE: for multi line comment do commit with `git commit` then insert comment before `Please enter the commit message ...`, comment example:  
 `1. add register in form html`  
-`2. add sign-in function in main.js`  
+`2. add register function in main.js`  
 next `ctrl+c or command+c` then `wq` (write and quit) then push  
   
-Create pull request by doing compare `base:development <- compare:branch_name` on github repo  
+Create pull request by doing compare `base:development <- compare:branch_name` on github repo. Pull request title `<feature-name>`, description same as commit comment. Example:  
+``Title: Register feature``  
+``Description:``  
+`1. add register in form html`  
+`2. add register function in main.js`  
   
 Choose `Merge pull request` to update `development` branch, make sure there isn't any conflict, if there is conflict please contact other contributors.  
   
