@@ -1,35 +1,64 @@
-const server = "http//localhost:3000"
+const server = "http://localhost:3000"
+
+$(document).ready(function () {
+    const token = localStorage.getItem("token")
+    console.log(token)
+    if(token){
+        $("#home-page").show()
+        $("#sign-in-page").hide()
+        $("#sign-up-page").hide()
+    }
+    else{
+        $("#home-page").hide()
+        $("#sign-in-page").show()
+        $("#sign-up-page").hide()
+    }
+})
 
 function signIn(e){
     e.preventDefault()
     // console.log("button terclick")
     const email = $("#email").val()
-    const password = $("#email").val()
+    const password = $("#password").val()
     $.ajax({
         method: "POST",
-        url: server + "/sign-in",
+        url: server + "/users/sign-in",
         data: {
             email,
             password
         }
     }).done(response =>{
-        console.log(response)
+        const token = response.token
+        localStorage.setItem("token", token)
+        $("#home-page").show()
+        $("#sign-in-page").hide()
+        $("#sign-up-page").hide()
+        $("#email").val("")
+        $("#password").val("")
     }).fail(err => {
         console.log(err)
     })
 }
 
+function showSignUp(e){
+    e.preventDefault()
+    $("#sign-up-page").show()
+    $("#home-page").hide()
+    $("#sign-in-page").hide()
+
+}
 function signUp(e){
     e.preventDefault()
-    const email = $("#email").val()
-    const password = $("#email").val()
+    const email = $("#sign-up-email").val()
+    const password = $("#sign-up-password").val()
     const first_name = $("#first_name").val()
     const last_name = $("#last_name").val()
-    const birth_year = $("#birth_date").val()
+    const birth_year = new Date().getFullYear() - +$("#age").val()
     const gender = $("#gender").val()
+    console.log(email, "ini email")
     $.ajax({
         method: "POST",
-        url: server + "/sign-up",
+        url: server + "/users/sign-up",
         data: {
             email,
             password,
@@ -39,8 +68,17 @@ function signUp(e){
             gender
         }
     }).done(response =>{
-        console.log(response)
+        // console.log(response)
+       
     }).fail(err => {
         console.log(err)
     })
+}
+
+function logOut(e){
+    e.preventDefault()
+    $("#home-page").hide()
+    $("#sign-in-page").show()
+    $("#sign-up-page").hide()
+    localStorage.removeItem("token")
 }
