@@ -4,7 +4,7 @@ Contributor notes:
 
 ## WARNING: DO NOT MERGE TO MASTER UNLESS APP IS READY TO DEPLOY
 
-ONLY FIRST TIME: git clone https://github.com/Group-Project-p1w1-hacktiv8/health-checker-app.git  
+ONLY FIRST TIME: `git clone https://github.com/Group-Project-p2w1-hacktiv8/health-checker-app.git` 
 
 Always pull first to stay up to date with `development` branch
 `git pull origin development`
@@ -45,10 +45,8 @@ health-checker-app
     │   └── index.js
     ├── controllers (filename PascalCase singular)
     │   └── Controller.js
-    ├── models (file name PascalCase singular, create using sequelize cli)
+    ├── models (model name PascalCase singular, create using sequelize cli)
     │   ├── index.js
-    │   ├── game.js
-    │   ├── usergame.js
     │   └── user.js
     ├── package-lock.json
     ├── game-store-scheme.png
