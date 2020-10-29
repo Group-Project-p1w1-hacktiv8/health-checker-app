@@ -38,15 +38,29 @@
   <!-- register page -->
   <section id="sign-up-page"> 
     <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
-      <div class="p-5 bg-light shadow" style="width: 30%; height: 80%; border-radius: 10px;">
-        <h2 class="text-center">register</h2>
+      <div class="p-5 bg-light shadow" style="width: 30%; height: 115%; border-radius: 10px;">
+        <h2 class="text-center">Register</h2>
         <img class="w-100" src="./assets/undraw_healthy_options_sdo3.png" alt="login page">
-        <form class="mt-4">
+        <form class="mt-4" onsubmit="checker(event)">
           <div class="form-group">
-            <input class="form-control" type="email" placeholder="your email">
+            <label for="email">Email</label>
+            <input class="form-control" type="email" id="email" placeholder="your email">
           </div>
           <div class="form-group">
-            <input class="form-control" type="password" placeholder="your password">
+            <label for="first_name">First Name</label>
+            <input class="form-control" type="first name" id="first_name" placeholder="first name">
+          </div>
+          <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input class="form-control" type="last name" id="last_name" placeholder="last name">
+          </div>
+          <div class="form-group">
+            <label for="age">Birth date</label>
+            <input class="form-control" id="birth_date" type="date" placeholder="your birthdate">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input class="form-control" type="password" id="password" placeholder="your password">
           </div>
           <button class="btn btn-block text-white" type="submit" style="background-color: #42b0f8;"> Sign up</button>
         </form>
@@ -56,7 +70,8 @@
   <!-- home page -->
   <section id="home-page" class="bg-light" style="height: 100vh; overflow-y: auto;">
     <nav class="navbar shadow navbar-light bg-light">
-      <a class="navbar-brand">Navbar</a>
+      <a class="navbar-brand">Health Checker</a>
+
       <button class="btn btn-danger">logout</button>
     </nav>
     <div class="container d-flex justify-content-center pt-5 flex-wrap">
