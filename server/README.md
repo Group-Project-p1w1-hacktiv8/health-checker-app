@@ -1,4 +1,69 @@
 API DOCUMENTATION HERE
+**Sign Up**
+----
+
+* **URL**
+
+  /users/sign-up
+
+* **Method:**
+
+  `POST`
+
+* **Data Params**
+
+  `{
+    email: "test@mail.com",
+    password: "12345"
+  }`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `{
+      id: 1,
+      email: "test@mail.com
+    }`
+ 
+* **Error Response:**
+
+  * **Code:** 500 INTERNAL SERVER ERROR <br />
+    **Content:** `{ error : "INTERNAL SERVER ERROR" }`
+
+================================================================================================
+
+**Sign In**
+----
+
+* **URL**
+
+  /users/sign-in
+
+* **Method:**
+
+  `POST`
+
+* **Data Params**
+
+  `{
+    email: "test@mail.com",
+    password: "12345"
+  }`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `{
+      accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJtZW1iZXJAbWFpbC5jb20iLCJpYXQiOjE2MDM5NTcwODZ9.hVDGHv4Vbf7F08WVbRcTsyoB_v9sWOu7frwWS9QMIbI"
+    }`
+ 
+* **Error Response:**
+
+  * **Code:** 500 INTERNAL SERVER ERROR <br />
+    **Content:** `{ error : "INTERNAL SERVER ERROR" }`
+
+================================================================================================
+
 **Get News**
 ----
   Returns json data about a single todo.
@@ -61,5 +126,5 @@ API DOCUMENTATION HERE
  
 * **Error Response:**
 
-  * **Code:** 500 SERVER ERROR <br />
-    **Content:** `{ error : "SERVER ERROR" }`
+  * **Code:** 500 INTERNAL SERVER ERROR <br />
+    **Content:** `{ error : "INTERNAL SERVER ERROR" }`
