@@ -4,11 +4,21 @@ const { signInToken } = require('../helpers/jwt');
 
 class UserController {
   static async signUp(req, res, next) {
-    const { email, password } = req.body;
+    const { 
+      email, 
+      password, 
+      first_name, 
+      last_name, 
+      gender, 
+      birth_year } = req.body;
     try {
       const user = await User.create({
         email,
-        password
+        password,
+        first_name,
+        last_name,
+        gender,
+        birth_year
       });
       
       res.status(201).json({
@@ -16,6 +26,7 @@ class UserController {
         email: user.email
       });
     } catch (err) {
+      console.log(err);
       next(err);      
     }
   }
