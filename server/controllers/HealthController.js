@@ -1,10 +1,11 @@
 const axios = require('axios');
-const CryptoJS = require('crypto-js');
+// const CryptoJS = require('crypto-js');
+const { User, Symptom } = require('../models');
 const baseURL = 'https://sandbox-healthservice.priaid.ch';
 
 class HealthController {
 
-  static findIssues(req, res, next){
+  static findSymptoms(req, res, next){
     // const computedHash = CryptoJS.HmacMD5("c6QRo4q2FKa5e8T3B", "https://sandbox-authservice.priaid.ch/login");
     // const computedHashString = computedHash.toString(CryptoJS.enc.Base64);
     // // console.log(computedHashString);
@@ -12,7 +13,7 @@ class HealthController {
     // console.log(auth)
     // console.log(computedHashString);
     axios({
-      url: baseURL + '/issues',
+      url: baseURL + '/symptoms',
       method: "get",
       params: {
         token: process.env.HEALTHTOKEN,
@@ -36,6 +37,52 @@ class HealthController {
         console.log(err)
         next(err);
       })
+  }
+
+  static diagnosis(req, res, next) {
+    const userId = +req.user.id;
+    User.findByPk(userId, {
+      include: Symptom
+    })
+      .then(data => {
+        if(data.Symptoms.length > 0) {
+          const symptoms = data.Symptoms.map(symptom => symptom.api_id);
+          return axios({
+            url: baseURL + `/diagnosis`,
+            method: 'get',
+            params: {
+              token: process.env.HEALTHTOKEN,
+              language: 'en-gb',
+              symptoms,
+              gender: data.gender,
+              year_of_birth: data.birth_year
+            }
+          })
+        } else {
+          throw {
+            name: 'NotFound'
+          }
+        }
+      })
+        .then(result => {
+          
+          result = result.filter(el => {
+            if(el.Issue.Accuracy > 50) {
+              return true
+            }
+          });
+
+          result = result.map(el => {
+            return {
+              ID: el.Issue.ID,
+              Name: el.Issue.Name
+            }
+          });
+          res.status(200).json(result)
+        })
+        .catch(err => {
+          next(err);
+        })
   }
 
   static findTreatment(req, res, next) {

@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.belongsToMany(models.Symptom, { through: models.UserSymptom });
     }
   };
   User.init({
