@@ -1,3 +1,5 @@
+const { response } = require("express")
+
 const server = "http://localhost:3000"
 
 $(document).ready(function () {
@@ -92,5 +94,16 @@ function logOut(e){
 }
 
 function getSymptomps(e){
-    
-}
+    e.preventDefault()
+    $.ajax({
+        method: "GET",
+        url: server + "/health/symptoms",
+    }).done(response => {
+        response.forEach(element => {
+            id = element.ID,
+            name = element.Name
+        });
+    }).fail(err => {
+        console.log(err)
+    })
+} 
