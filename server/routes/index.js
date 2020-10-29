@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 // ! USER ROUTER
 router.use('/users', userRouter);
 
-router.use(authentication);
+// router.use(authentication);
 
 // ! WIKI ROUTER
 router.use('/wiki', wikiRouter);
