@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 class NewsController {
-  static findNews(req, res) {
+  static findNews(req, res, next) {
     axios({
       url: "https://api.currentsapi.services/v1/search",
       method: "get",
@@ -13,10 +13,12 @@ class NewsController {
       
     })
       .then(response => {
+        console.log(response)
         res.status(200).json(response.data.news);
       })
       .catch(err => {
-        res.status(500).json(err);
+        console.log(err);
+        next(err)
       })
   }
 }
