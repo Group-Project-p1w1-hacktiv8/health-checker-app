@@ -1,8 +1,6 @@
 const router = require('express').Router();
 const NewsController =  require('../controllers/NewsController');
 
-router.get('/', (req, res) => {
-  res.send('HELLO WORLD');
-});
+router.get('/', NewsController.findNews);
 
 module.exports = router;

@@ -16,9 +16,10 @@
   <!-- ! our script -->
   <script src="main.js"></script>
   <!-- login page -->
-  <section id="login-page"> 
+  <section id="sign-in-page"> 
     <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
       <div class="p-5 bg-light shadow" style="width: 30%; height: 80%; border-radius: 10px;">
+
         <h2 class="text-center">Sign in</h2>
         <img class="w-100" src="./assets/undraw_healthy_options_sdo3.png" alt="login page">
         <form class="mt-4">
@@ -28,10 +29,50 @@
           <div class="form-group">
             <input class="form-control" type="password" placeholder="your password">
           </div>
-          <button class="btn btn-block text-white" type="submit" style="background-color: #42b0f8;"> Log in</button>
+          <button class="btn btn-block text-white" type="submit" style="background-color: #42b0f8;"> Sign in</button>
         </form>
       </div>
     </div>
   </section>
+
+  <!-- register page -->
+  <section id="sign-up-page"> 
+    <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+      <div class="p-5 bg-light shadow" style="width: 30%; height: 80%; border-radius: 10px;">
+        <h2 class="text-center">register</h2>
+        <img class="w-100" src="./assets/undraw_healthy_options_sdo3.png" alt="login page">
+        <form class="mt-4">
+          <div class="form-group">
+            <input class="form-control" type="email" placeholder="your email">
+          </div>
+          <div class="form-group">
+            <input class="form-control" type="password" placeholder="your password">
+          </div>
+          <button class="btn btn-block text-white" type="submit" style="background-color: #42b0f8;"> Sign up</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  <!-- home page -->
+  <section id="home-page" class="bg-light" style="height: 100vh; overflow-y: auto;">
+    <nav class="navbar shadow navbar-light bg-light">
+      <a class="navbar-brand">Navbar</a>
+      <button class="btn btn-danger">logout</button>
+    </nav>
+    <div class="container d-flex justify-content-center pt-5 flex-wrap">
+      <div class="card mx-4 mt-4 shadow" style="width: 18rem; width: 25%;">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Card Subtitle</h6>
+          <p class="card-text">
+            Quick example test to build on a card.
+          </p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </body>
 </html>
