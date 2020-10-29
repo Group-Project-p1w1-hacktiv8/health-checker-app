@@ -1,4 +1,6 @@
 const { User } = require('../models');
+const { comparePassword } = require('../helpers/hash');
+const { signInToken } = require('../helpers/jwt');
 
 class UserController {
   static async signUp(req, res, next) {
