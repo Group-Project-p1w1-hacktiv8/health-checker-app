@@ -65,6 +65,10 @@ class UserController {
     let {google_access_token} = req.body
     const client = new OAuth2Client("1527881779-0b6p5uijjlfsddain1cfomo3tu6unojv.apps.googleusercontent.com")
     let email;
+    let first_name;
+    let last_name;
+    let gender;
+    let birth_year;
     client.verifyIdToken({
       idToken: google_access_token,
       audience: "1527881779-0b6p5uijjlfsddain1cfomo3tu6unojv.apps.googleusercontent.com"
@@ -72,6 +76,10 @@ class UserController {
     .then(ticket => {
       let payload = ticket.getPayload()
       email = payload.email
+      first_name = payload.given_name
+      last_name = payload.family_name
+      gender = "male"
+      birth_year = 2000
       // console.log(payload, ">>>")
       return User.findOne({
         where: {email: payload.email}
@@ -80,13 +88,18 @@ class UserController {
         if(user){
           // generate token
           return user
-        }
+        } 
         else {
           let newUser = {
-            email: email,
-            password: "random"
+            email,
+            password: "12345",
+            first_name,
+            last_name,
+            gender,
+            birth_year
           }
-          return User.create({newUser})
+          // console.log(newUser)
+          return User.create(newUser)
         }
       })
     })
