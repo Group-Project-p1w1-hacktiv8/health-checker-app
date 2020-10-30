@@ -30,7 +30,7 @@ API DOCUMENTATION HERE
   * **Code:** 500 INTERNAL SERVER ERROR <br />
     **Content:** `{ error : "INTERNAL SERVER ERROR" }`
 
-================================================================================================
+=================================================================================================================================
 
 **Sign In**
 ----
@@ -62,11 +62,46 @@ API DOCUMENTATION HERE
   * **Code:** 500 INTERNAL SERVER ERROR <br />
     **Content:** `{ error : "INTERNAL SERVER ERROR" }`
 
-================================================================================================
+=================================================================================================================================
+
+**Get wiki**
+----
+
+* **URL**
+
+  /wiki
+
+* **Method:**
+
+  `GET`
+
+* **Request Header**
+
+  `"access_token": "<your access token>"`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `[
+    {
+        "title": "Headache",
+        "description": "<span class=\"searchmatch\">Headache</span> is the symptom of pain in the face, head, or neck. It can occur as a migraine, tension-type <span class=\"searchmatch\">headache</span>, or cluster <span class=\"searchmatch\">headache</span>. Frequent headaches"
+    },
+    {
+        "title": "Cluster headache",
+        "description": "Cluster <span class=\"searchmatch\">headache</span> (CH) is a neurological disorder characterized by recurrent severe <span class=\"searchmatch\">headaches</span> on one side of the head, typically around the eye. There is"
+    }
+]`
+ 
+* **Error Response:**
+
+  * **Code:** 500 INTERNAL SERVER ERROR <br />
+    **Content:** `{ error : "INTERNAL SERVER ERROR" }`
+
+=================================================================================================================================
 
 **Get News**
 ----
-  Returns json data about a single todo.
 
 * **URL**
 
@@ -128,3 +163,181 @@ API DOCUMENTATION HERE
 
   * **Code:** 500 INTERNAL SERVER ERROR <br />
     **Content:** `{ error : "INTERNAL SERVER ERROR" }`
+
+=================================================================================================================================
+
+
+**Get Symptoms**
+----
+
+* **URL**
+
+  /health/symptoms
+
+* **Method:**
+
+  `GET`
+
+* **Request Header**
+
+  `"access_token": "<your access token>"`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `[
+    {
+        "ID": 10,
+        "Name": "Abdominal pain"
+    },
+    {
+        "ID": 238,
+        "Name": "Anxiety"
+    },
+    {
+        "ID": 104,
+        "Name": "Back pain"
+    }
+  ]`
+ 
+* **Error Response:**
+
+  * **Code:** 500 INTERNAL SERVER ERROR <br />
+    **Content:** `{ error : "INTERNAL SERVER ERROR" }`
+
+=================================================================================================================================
+
+**Get Issues**
+----
+
+* **URL**
+
+  /health/issues
+
+* **Method:**
+
+  `GET`
+
+* **Request Header**
+
+  `"access_token": "<your access token>"`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `belum`
+ 
+* **Error Response:**
+
+  * **Code:** 500 INTERNAL SERVER ERROR <br />
+    **Content:** `{ error : "INTERNAL SERVER ERROR" }`
+
+=================================================================================================================================
+
+**Get Treatment**
+----
+
+* **URL**
+
+  /health/treatment
+
+* **Method:**
+
+  `POST`
+
+* **Request Header**
+
+  `"access_token": "<your access token>"`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `belum`
+ 
+* **Error Response:**
+
+  * **Code:** 500 INTERNAL SERVER ERROR <br />
+    **Content:** `{ error : "INTERNAL SERVER ERROR" }`
+
+=================================================================================================================================
+
+**Get Symptoms User**
+----
+
+* **URL**
+
+  /user-symptoms
+
+* **Method:**
+
+  `GET`
+
+* **Request Header**
+
+  `"access_token": "<your access token>"`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `belum`
+ 
+* **Error Response:**
+
+  * **Code:** 500 INTERNAL SERVER ERROR <br />
+    **Content:** `{ error : "INTERNAL SERVER ERROR" }`
+
+=================================================================================================================================
+
+**Create Symptoms User**
+----
+
+* **URL**
+
+  /user-symptoms/add
+
+* **Method:**
+
+  `POST`
+
+* **Request Header**
+
+  `"access_token": "<your access token>"`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `belum`
+ 
+* **Error Response:**
+
+  * **Code:** 500 INTERNAL SERVER ERROR <br />
+    **Content:** `{ error : "INTERNAL SERVER ERROR" }`
+
+=================================================================================================================================
+
+**delet Symptoms User**
+----
+
+* **URL**
+
+  /user-symptoms/delete/id
+
+* **Method:**
+
+  `DELETE`
+
+* **Request Header**
+
+  `"access_token": "<your access token>"`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `belum`
+ 
+* **Error Response:**
+
+  * **Code:** 500 INTERNAL SERVER ERROR <br />
+    **Content:** `{ error : "INTERNAL SERVER ERROR" }`
+
+=================================================================================================================================
