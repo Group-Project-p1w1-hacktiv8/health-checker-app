@@ -13,12 +13,12 @@ class NewsController {
       
     })
       .then(response => {
-        console.log(response)
+        console.log(response);
         res.status(200).json(response.data.news);
       })
       .catch(err => {
         console.log(err);
-        next(err)
+        next(err);
       })
   }
 }
