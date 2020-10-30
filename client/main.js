@@ -2,11 +2,12 @@ const server = "http://localhost:3000"
 
 $(document).ready(function () {
     const token = localStorage.getItem("token")
-    console.log(token)
+    // console.log(token)
     if(token){
         $("#home-page").show()
         $("#sign-in-page").hide()
         $("#sign-up-page").hide()
+        // getUserSymptoms()
     }
     else{
         $("#home-page").hide()
@@ -33,7 +34,8 @@ function signIn(e){
         const token = response.accessToken
         localStorage.setItem("token", token)
         // console.log(response)
-        getSymptomps(e)
+        getUserSymptoms(e)
+        getSymptoms(e)
         $("#home-page").show()
         $("#sign-in-page").hide()
         $("#sign-up-page").hide()
@@ -92,7 +94,7 @@ function logOut(e){
     // console.log(token)
 }
 
-function getSymptomps(e){
+function getSymptoms(e){
   const token = localStorage.getItem('token');
     e.preventDefault()
     $.ajax({
@@ -102,11 +104,12 @@ function getSymptomps(e){
           access_token: token
         }
     }).done(response => {
-      // console.log(response);
+      console.log('masukkkkkkkkk')
+      console.log(response);
         response.forEach(element => {
             const id = element.ID;
             const name = element.Name;
-            $(`<option value="${id},${name}">${name}</option>`).appendTo('#symptomps')
+            $(`<option value="${id},${name}">${name}</option>`).appendTo('#symptoms')
         });
     }).fail(err => {
         console.log(err)
@@ -114,14 +117,15 @@ function getSymptomps(e){
 } 
 
 function addSymptom(e) {
+  e.preventDefault();
   const token = localStorage.getItem('token');
   const value = $("#symptoms").val().split(',');
+  console.log(value);
   const symptomAPIId = value[0];
   const symptomName = value[1];
-  e.preventDefault();
   $.ajax({
     method: "POST",
-    url: server + "/health/add",
+    url: server + "/user-symptoms/add",
     headers: {
       access_token: token
     },
@@ -131,17 +135,14 @@ function addSymptom(e) {
     }
   })
     .done(response => {
-      // console.log(response);
-        response.forEach(element => {
-            const id = element.ID;
-            const name = element.Name;
-            $(`<option value="${id},${name}">${name}</option>`).appendTo('#symptomps')
-        });
+      console.log(response); 
+      getUserSymptoms(e);  
     })
     .fail(err => {
         console.log(err)
     })
 }
+
 
 function getUserSymptoms(e) {
   const token = localStorage.getItem('token');
@@ -154,12 +155,45 @@ function getUserSymptoms(e) {
     }
   })
     .done(response => {
-      // console.log(response);
-        response.forEach(element => {
-            const id = element.ID;
-            const name = element.Name;
-            $(`<option value="${id},${name}">${name}</option>`).appendTo('#symptomps')
-        });
+      $('#listSymptoms').empty();
+      response.userSymptoms.forEach(element => {
+        const id = element.id;
+        const name = element.name;
+        $(`<div class="my-2 mx-2 card bg-secondary d-flex flex-row">
+        <span>${name}</span>
+        <button type="button" class="close bg-dark btn-block pull-right" aria-label="Close" value="${id}" id="${id}">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>`).appendTo('#listSymptoms')
+    });
+    })
+    .fail(err => {
+        console.log(err)
+    })
+}
+
+function deleteUserSymptom(e) {
+  const token = localStorage.getItem('token');
+  e.preventDefault();
+  $.ajax({
+    method: "GET",
+    url: server + "/user-symptoms",
+    headers: {
+      access_token: token
+    }
+  })
+    .done(response => {
+      $('#listSymptoms').empty();
+      response.userSymptoms.forEach(element => {
+        const id = element.id;
+        const name = element.name;
+        $(`<div class="my-2 mx-2 card bg-secondary d-flex flex-row">
+        <span>${name}</span>
+        <button type="button" class="close bg-dark btn-block pull-right" aria-label="Close" value="${id}" id="${id}">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>`).appendTo('#listSymptoms')
+    });
     })
     .fail(err => {
         console.log(err)
