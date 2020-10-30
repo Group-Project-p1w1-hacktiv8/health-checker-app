@@ -1,5 +1,3 @@
-const { response } = require("express")
-
 const server = "http://localhost:3000"
 
 $(document).ready(function () {
