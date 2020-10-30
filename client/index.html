@@ -135,7 +135,7 @@
       </div>
       <div class="mx-4 mt-4 bg-light" style="width: 40%;">
         <div class="card-body">
-          <h5 class="card-title">Your symptoms</h5>
+          <h5 class="card-title" id="title-core">Your symptoms</h5>
           <div class="container d-flex flex-wrap bg-white" style="width: 100%; overflow-y: auto;" id="listSymptoms">
             <!-- <div class="my-2 mx-2 card bg-secondary d-flex flex-row">
               <span>asdsdaasd</span>
@@ -145,7 +145,7 @@
             </div> -->
           </div>
           <br>
-          <button type="button" class="btn btn-info btn-lg btn-block">Click here for Issue</button>
+          <button type="button" class="btn btn-info btn-lg btn-block" onclick="getUserIssue(event)" id="buttonIssue">Click here for your Issue</button>
         </div>
       </div>
       <div class="card bg-dark mx-4 mt-4 shadow" style="width: 40%;">

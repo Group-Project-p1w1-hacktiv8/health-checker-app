@@ -31,7 +31,7 @@ class HealthController {
     //   // }
     })
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         res.status(200).json(response.data);
       })
       .catch(err => {
@@ -47,14 +47,14 @@ class HealthController {
     })
       .then(data => {
         if(data.Symptoms.length > 0) {
-          const symptoms = data.Symptoms.map(symptom => symptom.api_id);
+          const symptoms = data.Symptoms.map(symptom => symptom.api_id).join(',');
           return axios({
             url: baseURL + `/diagnosis`,
             method: 'get',
             params: {
               token: process.env.HEALTHTOKEN,
               language: 'en-gb',
-              symptoms,
+              symptoms: `[${symptoms}]`,
               gender: data.gender,
               year_of_birth: data.birth_year
             }
@@ -66,9 +66,9 @@ class HealthController {
         }
       })
         .then(result => {
-          
-          result = result.filter(el => {
-            if(el.Issue.Accuracy > 50) {
+          // console.log(result.data, '-----------------------------')
+          result = result.data.filter(el => {
+            if(el.Issue.Accuracy > 20) {
               return true
             }
           });
@@ -88,6 +88,7 @@ class HealthController {
 
   static findTreatment(req, res, next) {
     const { issueId } = req.body;
+    console.log('masukkkkkkkkkkkkkkkkk')
     axios({
       url: baseURL + `/issues/${+issueId}/info`,
       method: 'get',
