@@ -43,6 +43,7 @@ function signIn(e){
         $("#sign-up-page").hide()
         $("#email").val("")
         $("#password").val("")
+        getNews(e);
     }).fail(err => {
         console.log(err)
     })
@@ -301,4 +302,45 @@ function getDataWiki(e) {
   .fail( err => {
     console.log(err)
   })
+
+}
+
+function getNews(e){
+  const token = localStorage.getItem('token');
+  e.preventDefault();
+  $.ajax({
+    method: "GET",
+    url: server + "/news",
+    headers: {
+      access_token: token
+    }
+  })
+    .done(respone => {
+      respone.forEach((el, i) => {
+        const img = el.image;
+        const url = el.url;
+        const tittle = el.title;
+        let temp;
+        if(i === 0){
+          temp = `<div class="carousel-item active">
+          <h2>${tittle}</h2>
+          <a href="${url}">
+            <img src="${img}">
+          </a>
+        </div>`
+        } else {
+          temp = `<div class="carousel-item">
+          <h2>${tittle}</h2>
+          <a href="${url}">
+            <img src="${img}">
+          </a>
+        </div>`
+        }
+        $('#news').append(temp);
+      })
+      
+    })
+    .fail(err => {
+      console.log(err);
+    })
 }
