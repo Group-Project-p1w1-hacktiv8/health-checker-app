@@ -1,5 +1,3 @@
-const { response } = require("express")
-
 const server = "http://localhost:3000"
 
 $(document).ready(function () {
@@ -35,6 +33,7 @@ function signIn(e){
         const token = response.accessToken
         localStorage.setItem("token", token)
         // console.log(response)
+        getSymptomps(e)
         $("#home-page").show()
         $("#sign-in-page").hide()
         $("#sign-up-page").hide()
@@ -94,16 +93,75 @@ function logOut(e){
 }
 
 function getSymptomps(e){
+  const token = localStorage.getItem('token');
     e.preventDefault()
     $.ajax({
         method: "GET",
         url: server + "/health/symptoms",
+        headers: {
+          access_token: token
+        }
     }).done(response => {
+      // console.log(response);
         response.forEach(element => {
-            id = element.ID,
-            name = element.Name
+            const id = element.ID;
+            const name = element.Name;
+            $(`<option value="${id},${name}">${name}</option>`).appendTo('#symptomps')
         });
     }).fail(err => {
         console.log(err)
     })
 } 
+
+function addSymptom(e) {
+  const token = localStorage.getItem('token');
+  const value = $("#symptoms").val().split(',');
+  const symptomAPIId = value[0];
+  const symptomName = value[1];
+  e.preventDefault();
+  $.ajax({
+    method: "POST",
+    url: server + "/health/add",
+    headers: {
+      access_token: token
+    },
+    data: {
+      symptomAPIId,
+      symptomName
+    }
+  })
+    .done(response => {
+      // console.log(response);
+        response.forEach(element => {
+            const id = element.ID;
+            const name = element.Name;
+            $(`<option value="${id},${name}">${name}</option>`).appendTo('#symptomps')
+        });
+    })
+    .fail(err => {
+        console.log(err)
+    })
+}
+
+function getUserSymptoms(e) {
+  const token = localStorage.getItem('token');
+  e.preventDefault();
+  $.ajax({
+    method: "GET",
+    url: server + "/user-symptoms",
+    headers: {
+      access_token: token
+    }
+  })
+    .done(response => {
+      // console.log(response);
+        response.forEach(element => {
+            const id = element.ID;
+            const name = element.Name;
+            $(`<option value="${id},${name}">${name}</option>`).appendTo('#symptomps')
+        });
+    })
+    .fail(err => {
+        console.log(err)
+    })
+}
