@@ -126,19 +126,18 @@
       <div class="card mx-4 shadow" style="width: 40%;">
         <div class="card-body">
           <h5 class="card-title">Check your symptomps</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Select your symptoms here</h6>
-          <form class="mt-4" onsubmit="">
-            <!-- <label for="symptomps">Gender</label> -->
-            <br>
+          <form class="mt-4" onsubmit="getDataWiki(event)">
+            <input type="text" placeholder="e.g. headache" id="check-symptoms">
+            <button type="submit">Check</button>
+            <!-- <br>
             <select name="gender">
               <option value="female">Female</option>
               <option value="male">Male</option>
-            </select>
+            </select> -->
           </form>
-          <br>
-          
+          <!-- <br>
           <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
+          <a href="#" class="card-link">Another link</a> -->
         </div>
       </div>
       <div class="mx-4 mt-4 bg-light" style="width: 40%;">

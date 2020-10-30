@@ -1,3 +1,5 @@
+const { response } = require("express")
+
 const server = "http://localhost:3000"
 
 $(document).ready(function () {
@@ -282,6 +284,24 @@ function onSignIn(googleUser) {
     .fail(err => {
         console.log(err)
     })
+}
+
+function getDataWiki(e) {
+  e.preventDefault()
+  const symptoms = $("#check-symptoms").val()
+  $.ajax({
+    method: "GET",
+    url: server + "/wiki",
+    data: {
+      symptoms
+    }
+  })
+  .done(response => {
+    console.log(response)
+  })
+  .fail( err => {
+    console.log(err)
+  })
 
 }
 
