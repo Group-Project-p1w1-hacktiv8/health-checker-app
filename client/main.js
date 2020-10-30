@@ -300,15 +300,16 @@ function getNews(e){
         const img = el.image;
         const url = el.url;
         const tittle = el.title;
+        let temp;
         if(i === 0){
-          const temp = `<div class="carousel-item active">
+          temp = `<div class="carousel-item active">
           <h2>${tittle}</h2>
           <a href="${url}">
             <img src="${img}">
           </a>
         </div>`
         } else {
-          const temp = `<div class="carousel-item">
+          temp = `<div class="carousel-item">
           <h2>${tittle}</h2>
           <a href="${url}">
             <img src="${img}">
