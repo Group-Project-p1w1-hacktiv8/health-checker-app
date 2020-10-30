@@ -90,6 +90,11 @@ function logOut(e){
     $("#sign-in-page").show()
     $("#sign-up-page").hide()
     localStorage.removeItem("token")
+    localStorage.clear()
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
     // const token = localStorage.getItem("token")
     // console.log(token)
 }
@@ -104,8 +109,6 @@ function getSymptoms(e){
           access_token: token
         }
     }).done(response => {
-      // console.log('masukkkkkkkkk')
-      // console.log(response);
         response.forEach(element => {
             const id = element.ID;
             const name = element.Name;
@@ -226,6 +229,7 @@ function getUserIssue(e) {
     })
 }
 
+
 function getTreatment(e, issueId) {
   const token = localStorage.getItem('token');
   e.preventDefault();
@@ -251,4 +255,30 @@ function getTreatment(e, issueId) {
 
 function removeButton() {
   $('#buttonIssue').remove();
+=======
+function onSignIn(googleUser) {
+    // var profile = googleUser.getBasicProfile();
+    // console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    // console.log('Name: ' + profile.getName());
+    // console.log('Image URL: ' + profile.getImageUrl());
+    // console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    var google_access_token = googleUser.getAuthResponse().id_token;
+    // console.log(id_token)
+    $.ajax({
+        method:"POST",
+        url: server + "/users/gooogleSignIn",
+        data: {
+            google_access_token
+        }
+    })
+    .done(response => {
+        console.log(response)
+        localStorage.setItem("access_token", response )
+        $("#home-page").show()
+        $("#sign-in-page").hide()
+        $("#sign-up-page").hide()
+    })  
+    .fail(err => {
+        console.log(err)
+    })
 }
