@@ -43,7 +43,7 @@ class UserSymptomController {
       const findAllSymptoms = await User.findByPk(userId, {
         include: Symptom
       });
-
+      // console.log(findAllSymptoms.Symptoms);
       res.status(200).json({
         userSymptoms : findAllSymptoms.Symptoms
       })
@@ -53,9 +53,17 @@ class UserSymptomController {
   }
 
   static async deleteUserSymptom(req, res, next) {
-    const userSymptomId = +req.params.id;
+    console.log('terpanggil')
+    const symptomId = +req.params.id;
+    const { id } = req.user;
     try {
-      const deleted = await UserSymptom.destroy(userSymptomId);
+      const deleted = await UserSymptom.destroy({
+        where: {
+          UserId: id,
+          SymptomId: symptomId
+        }
+      });
+      console.log(deleted);
       if(deleted) {
         res.status(200).json({
           message: 'User symptom deleted'
@@ -66,6 +74,7 @@ class UserSymptomController {
         }
       }
     } catch (err) {
+      console.log(err);
       next(err);
     }
   }

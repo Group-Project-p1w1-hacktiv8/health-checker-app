@@ -25,13 +25,18 @@ const authentication = (req, res, next) => {
 }
 
 const authorization = async (req, res, next) => {
-  const userSymptomId = +req.params.id;
+  const symptomId = +req.params.id;
   // console.log(req.params);
   const { id } = req.user;
   // console.log(id);
   try {
-    const userSymptom = await UserSymptom.findByPk(userSymptomId);
-
+    const userSymptom = await UserSymptom.findOne({
+      where: {
+        UserId: id,
+        SymptomId: symptomId
+      }
+    });
+    // console.log(userSymptom);
     if (!userSymptom) {
       throw {
         name: 'NotFound'
@@ -41,6 +46,7 @@ const authorization = async (req, res, next) => {
         name: 'NotAuthorized'
       }
     } else {
+      // console.log('masukkkkkkk');
       next();
     }
     

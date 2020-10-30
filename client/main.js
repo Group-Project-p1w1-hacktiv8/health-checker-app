@@ -109,8 +109,6 @@ function getSymptoms(e){
           access_token: token
         }
     }).done(response => {
-    //   console.log('masukkkkkkkkk')
-      console.log(response);
         response.forEach(element => {
             const id = element.ID;
             const name = element.Name;
@@ -140,7 +138,7 @@ function addSymptom(e) {
     }
   })
     .done(response => {
-      console.log(response); 
+      // console.log(response); 
       getUserSymptoms(e);  
     })
     .fail(err => {
@@ -166,7 +164,7 @@ function getUserSymptoms(e) {
         const name = element.name;
         $(`<div class="my-2 mx-2 card bg-secondary d-flex flex-row">
         <span>${name}</span>
-        <button type="button" class="close bg-dark btn-block pull-right" aria-label="Close" value="${id}" id="${id}">
+        <button type="button" class="close bg-dark btn-block pull-right" aria-label="Close" onclick="deleteUserSymptom(event,${id})">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>`).appendTo('#listSymptoms')
@@ -177,34 +175,87 @@ function getUserSymptoms(e) {
     })
 }
 
-function deleteUserSymptom(e) {
+function changeTitleIssue() {
+  $('#title-core').replaceWith('<h5 class="card-title" id="title-core">Click on your issue to get treatment</h5>');
+}
+
+function changeTitleTreatment() {
+  $('#title-core').replaceWith('<h5 class="card-title" id="title-core">Here is our suggestion</h5>');
+}
+
+
+function deleteUserSymptom(e, id) {
   const token = localStorage.getItem('token');
+  const symptomId = id;
   e.preventDefault();
   $.ajax({
-    method: "GET",
-    url: server + "/user-symptoms",
+    method: "DELETE",
+    url: server + `/user-symptoms/delete/${symptomId}`,
     headers: {
       access_token: token
     }
   })
     .done(response => {
-      $('#listSymptoms').empty();
-      response.userSymptoms.forEach(element => {
-        const id = element.id;
-        const name = element.name;
-        $(`<div class="my-2 mx-2 card bg-secondary d-flex flex-row">
-        <span>${name}</span>
-        <button type="button" class="close bg-dark btn-block pull-right" aria-label="Close" value="${id}" id="${id}">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>`).appendTo('#listSymptoms')
-    });
+      console.log(response);
+      getUserSymptoms(e);
     })
     .fail(err => {
         console.log(err)
     })
 }
 
+function getUserIssue(e) {
+  const token = localStorage.getItem('token');
+  e.preventDefault();
+  $.ajax({
+    method: "GET",
+    url: server + `/health/issues`,
+    headers: {
+      access_token: token
+    }
+  })
+    .done(response => {
+      // console.log(response);
+      changeTitleIssue()
+      removeButton()
+      const toChange = response.map(el => {
+        return `<button class="btn btn-primary mx-2" type="button" onclick="getTreatment(event,${el.ID})">${el.Name}</button>`
+      }).join(' ')
+      $('#listSymptoms').replaceWith(
+        `<div class="container d-flex flex-wrap bg-white" style="width: 100%; overflow-y: auto;" id="issues">${toChange}`);
+    })
+    .fail(err => {
+        console.log(err)
+    })
+}
+
+
+function getTreatment(e, issueId) {
+  const token = localStorage.getItem('token');
+  e.preventDefault();
+  $.ajax({
+    method: 'POST',
+    url: server + '/health/treatment',
+    headers: {
+      access_token: token
+    },
+    data: {
+      issueId
+    }
+  })
+    .then(response => {
+      changeTitleTreatment();
+      $('#issues').replaceWith(`<p>${response}</p>`);
+      console.log(response);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+}
+
+function removeButton() {
+  $('#buttonIssue').remove();
+=======
 function onSignIn(googleUser) {
     // var profile = googleUser.getBasicProfile();
     // console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
