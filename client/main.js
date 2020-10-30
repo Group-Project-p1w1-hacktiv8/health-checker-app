@@ -1,3 +1,4 @@
+
 const server = "http://localhost:3000"
 
 $(document).ready(function () {
@@ -214,4 +215,17 @@ function onSignIn(googleUser) {
     // console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
     var google_access_token = googleUser.getAuthResponse().id_token;
     // console.log(id_token)
+    $.ajax({
+        method:"POST",
+        url: server + "/users/gooogleSignIn",
+        data: {
+            google_access_token
+        }
+    })
+    .done(response => {
+        console.log(response)
+    })  
+    .fail(err => {
+        console.log(err)
+    })
 }
