@@ -13,7 +13,7 @@
   <!-- login page -->
   <section id="sign-in-page"> 
     <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
-      <div class="p-5 bg-light shadow" style="width: 30%; height: 80%; border-radius: 10px;">
+      <div class="p-5 bg-light shadow" style="width: 30%; height: 90%; border-radius: 10px;">
 
         <h2 class="text-center">Sign in</h2>
         <img class="w-100" src="./assets/undraw_healthy_options_sdo3.png" alt="login page">
@@ -27,7 +27,10 @@
           <button class="btn btn-block text-white" type="submit" style="background-color: #42b0f8;">Sign in</button>
         </form>
         <button class="btn btn-block text-white mt-3" onclick="showSignUp(event)" style="background-color: #42b0f8;"> Sign up</button>
+        <br>
         <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        <br>
+        <a href="#" onclick="signOut();">Sign out</a>
       </div>
     </div>
   </section>
