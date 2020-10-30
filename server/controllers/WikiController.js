@@ -2,7 +2,7 @@ const axios = require('axios')
 const { getTitle } = require('../helper/getTitle')
 
 class WikiController{
-    static findSymptoms(req, res) {
+    static findSymptoms(req, res, next) {
         axios({
         method: 'get',
         url: process.env.WIKI_API,
@@ -19,7 +19,7 @@ class WikiController{
             res.status(200).json(newData)
         })
         .catch(error => {
-            res.status(500).json(error)
+            next(error)
         })
     }
     
