@@ -1,16 +1,17 @@
 const axios = require('axios')
 const { getTitle } = require('../helper/getTitle')
-
+const wikiUrl = 'https://en.wikipedia.org/w/api.php'
 class WikiController{
     static findSymptoms(req, res, next) {
+        // console.log(req.body)
         axios({
         method: 'get',
-        url: process.env.WIKI_API,
+        url: wikiUrl,
         params: {
             action: "query",
             format: "json",
             list: "search",
-            srsearch: req.query.symptoms
+            srsearch: req.body.symptoms
         }
         })
         .then( response => {
