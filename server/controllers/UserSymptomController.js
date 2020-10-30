@@ -1,5 +1,4 @@
 const { Symptom, UserSymptom, User } = require('../models');
-const { verifyToken } = require('../helpers/jwt');
 
 class UserSymptomController {
   static async addSymptom(req, res, next) {
