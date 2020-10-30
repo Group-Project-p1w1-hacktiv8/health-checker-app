@@ -1,4 +1,3 @@
-
 const server = "http://localhost:3000"
 
 $(document).ready(function () {
@@ -91,6 +90,11 @@ function logOut(e){
     $("#sign-in-page").show()
     $("#sign-up-page").hide()
     localStorage.removeItem("token")
+    localStorage.clear()
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
     // const token = localStorage.getItem("token")
     // console.log(token)
 }
@@ -105,7 +109,7 @@ function getSymptoms(e){
           access_token: token
         }
     }).done(response => {
-      console.log('masukkkkkkkkk')
+    //   console.log('masukkkkkkkkk')
       console.log(response);
         response.forEach(element => {
             const id = element.ID;
@@ -200,12 +204,6 @@ function deleteUserSymptom(e) {
         console.log(err)
     })
 }
-function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-    });
-}
 
 function onSignIn(googleUser) {
     // var profile = googleUser.getBasicProfile();
@@ -224,6 +222,10 @@ function onSignIn(googleUser) {
     })
     .done(response => {
         console.log(response)
+        localStorage.setItem("access_token", response )
+        $("#home-page").show()
+        $("#sign-in-page").hide()
+        $("#sign-up-page").hide()
     })  
     .fail(err => {
         console.log(err)
